@@ -1,8 +1,10 @@
+// Imports react funtions
 import { useState, useEffect } from "react";
 
 // Imports api call funtion
 import { getBlogs } from "./api";
 
+// Main blog component
 export default function ApiBlog() {
   // Declares useStates
   const [blogs, setBlogs] = useState(null);
@@ -26,14 +28,17 @@ export default function ApiBlog() {
     loadBlogs();
   }, []);
 
-  console.log(blogs);
-
-  //   const blogElements = blogs.map((blog) => {
-  //     <div>
-  //       <h1>{blog.title}</h1>
-  //       <p>{blog.body}</p>
-  //     </div>;
-  //   });
+  //   Maps over blogs to create blog elements
+  const blogElements = blogs?.map((blog) => {
+    return (
+      <div key={blog.id}>
+        <h1>
+          <span>{blog.id}.</span> {blog.title}
+        </h1>
+        <p>{blog.body}</p>
+      </div>
+    );
+  });
 
   //   Displays loading
   if (loading) {
@@ -42,13 +47,14 @@ export default function ApiBlog() {
 
   //   Early return if theres an error
   if (error) {
-    return <h1>There was an error: {error.message}</h1>;
+    return <h1>{error.message}</h1>;
   }
 
+  //   Returns blogs if there are no errors
   return (
     <>
       <h1>Posts</h1>
-      {/* <div>{blogElements}</div> */}
+      <div>{blogElements}</div>
     </>
   );
 }

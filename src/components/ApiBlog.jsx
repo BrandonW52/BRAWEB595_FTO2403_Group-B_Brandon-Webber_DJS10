@@ -11,7 +11,7 @@ export default function ApiBlog() {
 
   //   Calls and sets useState data
   useEffect(() => {
-    async function loadVans() {
+    async function loadBlogs() {
       setLoading(true);
       try {
         const data = await getBlogs();
@@ -23,7 +23,7 @@ export default function ApiBlog() {
       }
     }
 
-    loadVans();
+    loadBlogs();
   }, []);
 
   console.log(blogs);
